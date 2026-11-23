@@ -1,0 +1,83 @@
+@model PatientAccessViewModel
+@{
+    ViewData["Title"] = "Access requests";
+    var pending = Model.Requests.Where(r => r.Status == AccessRequestStatus.Pending).ToList();
+    var current = Model.Requests.Where(r => r.WaitingForCode || r.AccessActive).ToList();
+    var history = Model.Requests.Except(pending).Except(current).ToList();
+}
+
+<h1 class="h3 mb-1">Welcome, @Model.Patient.FullName</h1>
+<p class="text-muted">Patient ID: <strong>@Model.Patient.PatientId</strong> — give this to your doctor.</p>
+
+@if (Model.NewCode is not null)
+{
+    <div class="alert alert-success text-center">
+        <div>Access approved (@Model.NewCodeRequestId). Give this one-time code to your doctor:</div>
+        <div class="display-5 fw-bold font-monospace my-2" style="letter-spacing:.3em">@Model.NewCode</div>
+        <div class="small">It works once, for a few minutes. It will not be shown again.</div>
+    </div>
+}
+
+<h2 class="h5 mt-4">Pending requests</h2>
+@if (pending.Count == 0)
+{
+    <p class="text-muted">No pending requests.</p>
+}
+@foreach (var r in pending)
+{
+    <div class="border rounded p-3 mb-2 bg-warning-subtle">
+        <strong>Dr. @r.DoctorName</strong> · @r.DoctorSpecialty
+        <div class="small text-muted mb-2">is requesting access to your medical history · @r.CreatedAt.ToLocalTime().ToString("g")</div>
+        <form asp-action="Approve" asp-route-id="@r.RequestId" method="post" class="d-inline">
+            <button type="submit" class="btn btn-sm btn-success">Approve</button>
+        </form>
+        <form asp-action="Reject" asp-route-id="@r.RequestId" method="post" class="d-inline">
+            <button type="submit" class="btn btn-sm btn-outline-danger">Reject</button>
+        </form>
+    </div>
+}
+
+<h2 class="h5 mt-4">Active access</h2>
+@if (current.Count == 0)
+{
+    <p class="text-muted">No doctor has access right now.</p>
+}
+else
+{
+    <table class="table align-middle">
+        <thead><tr><th>Doctor</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+            @foreach (var r in current)
+            {
+                <tr>
+                    <td>Dr. @r.DoctorName <span class="text-muted small">@r.DoctorSpecialty</span></td>
+                    <td><partial name="_AccessStatus" model="r" /></td>
+                    <td>
+                        <form asp-action="Revoke" asp-route-id="@r.RequestId" method="post">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Revoke</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (history.Count > 0)
+{
+    <h2 class="h5 mt-4">History</h2>
+    <table class="table table-sm">
+        <thead><tr><th>Request</th><th>Doctor</th><th>Sent</th><th>Status</th></tr></thead>
+        <tbody>
+            @foreach (var r in history)
+            {
+                <tr>
+                    <td>@r.RequestId</td>
+                    <td>Dr. @r.DoctorName</td>
+                    <td>@r.CreatedAt.ToLocalTime().ToString("g")</td>
+                    <td><partial name="_AccessStatus" model="r" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
