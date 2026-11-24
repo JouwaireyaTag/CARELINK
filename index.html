@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CARELINK - Authentication</title>
+  <!-- Bootstrap Icons for clean eye toggle icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="auth-page">
+    <section class="auth-card" id="authCard" aria-label="User Authentication">
+      
+      <!-- Sign In Form (Left side) -->
+      <div class="auth-pane auth-pane--login">
+        <form class="auth-form" id="loginForm" novalidate>
+          <h1 class="form-title">Sign In</h1>
+
+          <!-- Role Selector -->
+          <div class="input-group">
+            <label for="loginRole">Account Type</label>
+            <select id="loginRole" name="role" class="role-select">
+              <option value="patient" selected>Patient</option>
+              <option value="doctor">Doctor</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="loginUser" id="loginUserLabel">Patient ID or Email</label>
+            <input
+              type="text"
+              id="loginUser"
+              name="loginUser"
+              placeholder="Enter patient ID or email"
+              required
+            />
+            <small class="error-msg" id="loginUserError"></small>
+          </div>
+
+          <div class="input-group">
+            <label for="loginPassword">Password</label>
+            <div class="password-box">
+              <input
+                type="password"
+                id="loginPassword"
+                name="loginPassword"
+                placeholder="Enter your password"
+                required
+              />
+              <button
+                type="button"
+                class="toggle-pass"
+                data-target="loginPassword"
+                aria-label="Toggle password visibility"
+              >
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+            <small class="error-msg" id="loginPasswordError"></small>
+          </div>
+
+          <div class="form-meta">
+            <label class="checkbox-label">
+              <input type="checkbox" id="keepSignedIn" name="keepSignedIn" />
+              <span>Keep me signed in</span>
+            </label>
+            <a href="#" class="text-link" id="forgotPasswordLink">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn-primary">Sign in</button>
+
+          <p class="switch-text">
+            New to CARELINK?
+            <button type="button" class="link-btn" id="goRegisterBtn">
+              Create an account
+            </button>
+          </p>
+        </form>
+      </div>
+
+      <!-- Create Account Form (Right side) -->
+      <div class="auth-pane auth-pane--register">
+        <form class="auth-form" id="registerForm" novalidate>
+          <h1 class="form-title">Create Account</h1>
+
+          <!-- Role Selector -->
+          <div class="input-group">
+            <label for="regRole">Register As</label>
+            <select id="regRole" name="role" class="role-select">
+              <option value="patient" selected>Patient</option>
+              <option value="doctor">Doctor</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="fullName">Full Name</label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              placeholder="Enter your full name"
+              required
+            />
+            <small class="error-msg" id="fullNameError"></small>
+          </div>
+
+          <div class="input-group">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="name@example.com"
+              required
+            />
+            <small class="error-msg" id="emailError"></small>
+          </div>
+
+          <!-- Extra field shown only if Doctor is selected -->
+          <div class="input-group" id="licenseGroup" style="display: none;">
+            <label for="medicalLicense">Medical License Number</label>
+            <input
+              type="text"
+              id="medicalLicense"
+              name="medicalLicense"
+              placeholder="Enter syndicate / license ID"
+            />
+            <small class="error-msg" id="licenseError"></small>
+          </div>
+
+          <div class="input-group">
+            <label for="regPassword">Password</label>
+            <div class="password-box">
+              <input
+                type="password"
+                id="regPassword"
+                name="regPassword"
+                placeholder="Use 8 characters or more"
+                minlength="8"
+                required
+              />
+              <button
+                type="button"
+                class="toggle-pass"
+                data-target="regPassword"
+                aria-label="Toggle password visibility"
+              >
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+            <small class="hint-text">Use 8 characters or more.</small>
+            <small class="error-msg" id="regPasswordError"></small>
+          </div>
+
+          <button type="submit" class="btn-primary">Create account</button>
+
+          <p class="switch-text">
+            Already have an account?
+            <button type="button" class="link-btn" id="goLoginBtn">
+              Sign in
+            </button>
+          </p>
+        </form>
+      </div>
+
+      <!-- Sliding Skewed Blade Overlay -->
+      <div class="auth-band" aria-hidden="true">
+        <span class="band-edge band-edge--lead"></span>
+        <div class="band-inner">
+          <div class="band-page">
+            <div class="band-content band-content--register">
+              <span class="brand-tag">CARELINK</span>
+              <h2 class="welcome-title">Your health <em>starts here.</em></h2>
+              <p class="band-desc">
+                Create your profile to manage medical records, control access permissions, and streamline consultations.
+              </p>
+            </div>
+
+            <div class="band-content band-content--login">
+              <span class="brand-tag">CARELINK</span>
+              <h2 class="welcome-title">Welcome <em>back.</em></h2>
+              <p class="band-desc">
+                One Patient. One Trusted Medical History. Access records safely in one place.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
