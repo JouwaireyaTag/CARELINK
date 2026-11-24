@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CARELINK - Admin Dashboard</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Shared Dashboard CSS -->
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+
+  <div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <span class="brand-logo">CARELINK</span>
+        <button class="btn-close-sidebar d-lg-none" id="closeSidebar">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <div class="user-badge">
+        <div class="avatar">JA</div>
+        <div>
+          <h6 class="mb-0 text-white">Jowaireya Ahmed</h6>
+          <small class="text-gold">System Administrator</small>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#stats-overview" class="nav-link active"><i class="bi bi-speedometer2"></i> System Overview</a>
+        <a href="#doctor-approvals" class="nav-link">
+          <i class="bi bi-person-check-fill"></i> Doctor Verification
+          <span class="badge bg-gold text-dark ms-auto" id="pendingDoctorsBadge">2</span>
+        </a>
+        <a href="#audit-logs" class="nav-link"><i class="bi bi-shield-exclamation"></i> Security Audit Logs</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="index.html" class="nav-link text-danger-light">
+          <i class="bi bi-box-arrow-left"></i> Sign Out
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Top Navbar -->
+      <header class="topbar">
+        <div class="d-flex align-items-center gap-3">
+          <button class="btn btn-outline-success d-lg-none" id="openSidebar">
+            <i class="bi bi-list"></i>
+          </button>
+          <h4 class="page-title mb-0">Administration & Security Control</h4>
+        </div>
+        <div>
+          <span class="patient-id-pill">
+            <i class="bi bi-shield-lock"></i> Admin Mode
+          </span>
+        </div>
+      </header>
+
+      <div class="container-fluid py-4 px-4">
+
+        <!-- System Stats Cards -->
+        <section id="stats-overview" class="row g-3 mb-4">
+          <div class="col-6 col-md-3">
+            <div class="stat-card">
+              <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
+              <div>
+                <small class="text-muted">Total Patients</small>
+                <h5 class="mb-0 fw-bold">1,248</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="stat-card">
+              <div class="stat-icon"><i class="bi bi-heart-pulse-fill"></i></div>
+              <div>
+                <small class="text-muted">Verified Doctors</small>
+                <h5 class="mb-0 fw-bold" id="verifiedDoctorsCount">86</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="stat-card">
+              <div class="stat-icon"><i class="bi bi-hourglass-split"></i></div>
+              <div>
+                <small class="text-muted">Pending Approvals</small>
+                <h5 class="mb-0 fw-bold text-warning" id="pendingStatCount">2</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="stat-card">
+              <div class="stat-icon"><i class="bi bi-activity"></i></div>
+              <div>
+                <small class="text-muted">Record Accesses Today</small>
+                <h5 class="mb-0 fw-bold">142</h5>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Doctor Verification & Approval Table -->
+        <section id="doctor-approvals" class="card custom-card mb-4">
+          <div class="card-header">
+            <h5 class="mb-0 fw-bold text-green"><i class="bi bi-patch-check me-2"></i>Pending Doctor Verification Requests</h5>
+            <small class="text-muted">Review medical syndicate licenses before granting clinical access.</small>
+          </div>
+          <div class="card-body table-responsive">
+            <table class="table align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>Applicant Name</th>
+                  <th>Email</th>
+                  <th>Medical License ID</th>
+                  <th>Submitted Date</th>
+                  <th>Status</th>
+                  <th class="text-end">Decision</th>
+                </tr>
+              </thead>
+              <tbody id="doctorApprovalsBody">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Security Audit Logs Table -->
+        <section id="audit-logs" class="card custom-card">
+          <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div>
+              <h5 class="mb-0 fw-bold text-green"><i class="bi bi-journal-text me-2"></i>Medical Record Audit Logs</h5>
+              <small class="text-muted">Real-time accountability log of all record access and modifications.</small>
+            </div>
+            <input type="text" id="logFilterInput" class="form-control form-control-sm" style="max-width: 250px;" placeholder="Filter logs by doctor or patient..." />
+          </div>
+          <div class="card-body table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Actor (User)</th>
+                  <th>Target Patient</th>
+                  <th>Action Performed</th>
+                  <th>Authorization Method</th>
+                </tr>
+              </thead>
+              <tbody id="auditLogsBody">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="admin-dashboard.js"></script>
+</body>
+</html>

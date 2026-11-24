@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CARELINK - Centralized Medical History Platform</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Landing Page CSS -->
+  <link rel="stylesheet" href="home.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top custom-navbar">
+    <div class="container">
+      <a class="navbar-brand brand-logo" href="home.html">
+        <i class="bi bi-heart-pulse-fill text-gold me-2"></i>CARELINK
+      </a>
+      <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <i class="bi bi-list fs-2"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+          <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="#how-it-works">How It Works</a></li>
+          <li class="nav-item"><a class="nav-link" href="#security">Privacy & Security</a></li>
+          <li class="nav-item mt-2 mt-lg-0">
+            <a href="index.html" class="btn btn-gold px-4">Sign In / Register</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7">
+          <span class="hero-badge">DEPI Full Stack .NET Capstone Project</span>
+          <h1 class="hero-title mt-3">
+            One Patient. <br />
+            <span>One Trusted Medical History.</span>
+          </h1>
+          <p class="hero-desc mt-3">
+            CARELINK organizes your surgeries, allergies, chronic conditions, and medications in one secure digital platform—putting you in complete control of who accesses your medical records during consultations.
+          </p>
+          <div class="d-flex flex-wrap gap-3 mt-4">
+            <a href="index.html" class="btn btn-gold btn-lg px-4">
+              <i class="bi bi-person-heart me-2"></i>Patient Portal
+            </a>
+            <a href="index.html" class="btn btn-outline-cream btn-lg px-4">
+              <i class="bi bi-stethoscope me-2"></i>Doctor Access
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="hero-preview-card">
+            <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
+              <div class="d-flex align-items-center gap-2">
+                <span class="dot bg-success"></span>
+                <strong class="text-green">Patient-Controlled Consent</strong>
+              </div>
+              <span class="badge bg-gold text-dark">OTP Active</span>
+            </div>
+            <div class="preview-item">
+              <i class="bi bi-shield-lock-fill text-green"></i>
+              <div>
+                <h6 class="mb-0 fw-bold">Temporary Doctor Access</h6>
+                <small class="text-muted">6-digit one-time verification code expires automatically.</small>
+              </div>
+            </div>
+            <div class="preview-item">
+              <i class="bi bi-file-earmark-medical-fill text-green"></i>
+              <div>
+                <h6 class="mb-0 fw-bold">Centralized Clinical Records</h6>
+                <small class="text-muted">Allergies, chronic diseases, and prescriptions in one place.</small>
+              </div>
+            </div>
+            <div class="preview-item mb-0">
+              <i class="bi bi-journal-check text-green"></i>
+              <div>
+                <h6 class="mb-0 fw-bold">Full Audit Accountability</h6>
+                <small class="text-muted">Every record view or update is securely logged.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Features Section -->
+  <section id="features" class="py-5">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <span class="section-tag">Why CARELINK</span>
+        <h2 class="section-title mt-1">Built for Safer, Faster Consultations</h2>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-folder2-open"></i></div>
+            <h5>Unified History</h5>
+            <p class="text-muted small mb-0">No more scattered paper prescriptions or forgotten surgical details across different clinics.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-key-fill"></i></div>
+            <h5>OTP Consent Control</h5>
+            <p class="text-muted small mb-0">Doctors request access; patients approve and share a temporary one-time verification code.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-patch-check-fill"></i></div>
+            <h5>Verified Physicians</h5>
+            <p class="text-muted small mb-0">Every doctor account undergoes strict medical license verification by administrators.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-eye-fill"></i></div>
+            <h5>Transparent Audit Logs</h5>
+            <p class="text-muted small mb-0">Complete traceability showing who accessed or updated any medical record and when.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="steps-section py-5">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <span class="section-tag">Workflow</span>
+        <h2 class="section-title mt-1">How CARELINK Works</h2>
+      </div>
+
+      <div class="row g-4 text-center">
+        <div class="col-md-4">
+          <div class="step-box">
+            <div class="step-num">1</div>
+            <h5 class="fw-bold mt-3">Create Your Profile</h5>
+            <p class="text-muted small">Patients document their allergies, medications, and past surgeries in a structured digital profile.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="step-box">
+            <div class="step-num">2</div>
+            <h5 class="fw-bold mt-3">Approve & Share OTP</h5>
+            <p class="text-muted small">During a clinic visit, the doctor sends an access request and you authorize them with a 6-digit OTP.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="step-box">
+            <div class="step-num">3</div>
+            <h5 class="fw-bold mt-3">Update & Track Care</h5>
+            <p class="text-muted small">The doctor reviews your history safely and logs new consultation notes directly into your record.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security Banner -->
+  <section id="security" class="py-5">
+    <div class="container">
+      <div class="security-banner text-center">
+        <i class="bi bi-shield-lock text-gold fs-1"></i>
+        <h3 class="fw-bold text-white mt-2">Medical Data Privacy First</h3>
+        <p class="text-light opacity-75 mx-auto" style="max-width: 650px;">
+          Designed with Role-Based Access Control (RBAC), expiring permissions, and comprehensive audit trails to keep sensitive patient records protected at all times.
+        </p>
+        <a href="index.html" class="btn btn-gold mt-2 px-4">Access CARELINK Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="custom-footer py-4">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+      <span class="fw-bold text-gold">CARELINK</span>
+      <small class="text-light opacity-75 text-center">
+        Developed as part of the Digital Egypt Pioneers Initiative (DEPI) — Full Stack .NET Track
+      </small>
+      <small class="text-light opacity-75">&copy; 2026 CARELINK Team</small>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
