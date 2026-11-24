@@ -1,0 +1,20 @@
+@model AccessRequestRow
+@* Status badge used on both the doctor and the patient page. *@
+@if (Model.AccessActive)
+{
+    <span class="badge text-bg-success">Access active until @Model.AccessExpiresAt!.Value.ToLocalTime().ToString("HH:mm")</span>
+}
+else if (Model.WaitingForCode)
+{
+    <span class="badge text-bg-primary">Approved · code valid until @Model.CodeExpiresAt!.Value.ToLocalTime().ToString("HH:mm")</span>
+}
+else
+{
+    var css = Model.Status switch
+    {
+        AccessRequestStatus.Pending => "text-bg-warning",
+        AccessRequestStatus.Rejected => "text-bg-danger",
+        _ => "text-bg-secondary",
+    };
+    <span class="badge @css">@Model.Status</span>
+}

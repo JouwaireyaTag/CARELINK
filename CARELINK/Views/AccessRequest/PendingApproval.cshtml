@@ -1,0 +1,11 @@
+@model DoctorProfile
+@{
+    ViewData["Title"] = "Waiting for approval";
+}
+
+<h1 class="h3">Your account is waiting for approval</h1>
+<p>
+    Thanks, Dr. @Model.FullName. An admin needs to check your license number
+    (<strong>@Model.LicenseNumber</strong>) before you can search patients or request access.
+</p>
+<p class="text-muted">Doctor ID: @Model.DoctorId</p>

@@ -1,0 +1,52 @@
+@model AdminDoctorsViewModel
+@{
+    ViewData["Title"] = "Doctor verification";
+}
+
+<h1 class="h3">Doctor verification</h1>
+
+<h2 class="h5 mt-4">Waiting for approval (@Model.Pending.Count)</h2>
+@if (Model.Pending.Count == 0)
+{
+    <p class="text-muted">No doctors waiting.</p>
+}
+else
+{
+    <table class="table align-middle">
+        <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Specialty</th><th>License No.</th><th></th></tr></thead>
+        <tbody>
+            @foreach (var d in Model.Pending)
+            {
+                <tr>
+                    <td>@d.DoctorId</td>
+                    <td>@d.FullName</td>
+                    <td>@d.Email</td>
+                    <td>@d.Specialty</td>
+                    <td>@d.LicenseNumber</td>
+                    <td class="text-nowrap">
+                        <form asp-action="ApproveDoctor" method="post" class="d-inline">
+                            <input type="hidden" name="doctorId" value="@d.DoctorId" />
+                            <button type="submit" class="btn btn-sm btn-success">Approve</button>
+                        </form>
+                        <form asp-action="RejectDoctor" method="post" class="d-inline"
+                              onsubmit="return confirm('Reject and block this doctor account?');">
+                            <input type="hidden" name="doctorId" value="@d.DoctorId" />
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Reject</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<h2 class="h5 mt-4">Approved doctors (@Model.Approved.Count)</h2>
+<table class="table table-sm">
+    <thead><tr><th>ID</th><th>Name</th><th>Specialty</th><th>License No.</th></tr></thead>
+    <tbody>
+        @foreach (var d in Model.Approved)
+        {
+            <tr><td>@d.DoctorId</td><td>@d.FullName</td><td>@d.Specialty</td><td>@d.LicenseNumber</td></tr>
+        }
+    </tbody>
+</table>

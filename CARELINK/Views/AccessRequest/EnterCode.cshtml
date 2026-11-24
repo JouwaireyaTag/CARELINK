@@ -1,0 +1,34 @@
+@model EnterCodeViewModel
+@{
+    ViewData["Title"] = "Enter verification code";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5 text-center">
+        <h1 class="h4">Enter the code from the patient</h1>
+        <p class="text-muted">Patient: @Model.Request.PatientId · Request @Model.Request.RequestId</p>
+
+        @if (Model.Request.WaitingForCode)
+        {
+            <form asp-action="EnterCode" asp-route-id="@Model.Request.RequestId" method="post" novalidate>
+                <input asp-for="Code" class="form-control form-control-lg text-center mb-2"
+                       inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••••" />
+                <span asp-validation-for="Code" class="text-danger d-block mb-2"></span>
+                <button type="submit" class="btn btn-primary w-100">Verify &amp; open file</button>
+            </form>
+            <p class="small text-warning-emphasis mt-2">
+                Attempts left: @Model.Request.AttemptsLeft ·
+                code valid until @Model.Request.CodeExpiresAt!.Value.ToLocalTime().ToString("HH:mm")
+            </p>
+        }
+        else
+        {
+            <div class="alert alert-secondary">
+                <partial name="_AccessStatus" model="Model.Request" />
+                <div class="mt-2">This request cannot take a code any more.</div>
+            </div>
+        }
+
+        <a asp-action="Doctor">Back to my requests</a>
+    </div>
+</div>
