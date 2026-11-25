@@ -54,13 +54,13 @@ CARELINK aims to organize medical history in one centralized system, helping aut
 
 ## Team Members
 
-| Name | Role |
-|------|------|
-| Jowaireya Ahmed | Team Leader & System Analyst |
-| Aya Medhat | Database Developer |
-| Mostafa Nour Eldin | Backend Developer – Authentication & Security |
-| Mourad Fikry | Backend Developer – Medical System |
-| Fatma Ahmed | Frontend Developer |
+| Name | 
+|------|
+| Jowaireya Ahmed | 
+| Aya Medhat | 
+| Mostafa Nour Eldin | 
+| Mourad Fikry | 
+| Fatma Ahmed | 
 
 *Team roles may be adjusted according to project requirements and team progress.*
 
