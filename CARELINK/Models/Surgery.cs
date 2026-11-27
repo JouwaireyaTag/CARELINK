@@ -1,4 +1,4 @@
-using CARELINK.Models;
+namespace CARELINK.Models;
 
 /// <summary>dbo.Surgeries. SurgeryId looks like "SUR-000001".</summary>
 public class Surgery
@@ -8,7 +8,6 @@ public class Surgery
     public string? SurgeryName { get; set; }
     public DateOnly? SurgeryDate { get; set; }
     public string? Hospital { get; set; }
-    public string? Notes { get; set; }              // column Notes_Surgeries
-
+    public string? Notes { get; set; }
     public PatientProfile? Patient { get; set; }
 }

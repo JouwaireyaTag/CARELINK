@@ -1,0 +1,92 @@
+
+@model List<CARELINK.Models.MedicalVisit>
+
+@{
+    ViewData["Title"] = "Medical Visits";
+
+    var patientId = Context.Request.Query["patientId"].ToString();
+    var isDoctorView = !string.IsNullOrEmpty(patientId);
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Medical Visits</h2>
+
+        @if (isDoctorView)
+        {
+            <a asp-action="Create"
+               asp-route-patientId="@patientId"
+               class="btn btn-primary">
+                Add Medical Visit
+            </a>
+        }
+    </div>
+
+    @if (TempData["Success"] is not null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    @if (Model is null || !Model.Any())
+    {
+        <div class="alert alert-info">
+            No medical visits found.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped align-middle">
+
+                <thead>
+                    <tr>
+                        <th>Visit Date</th>
+                        <th>Diagnosis</th>
+                        <th>Treatment</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var visit in Model)
+                    {
+                        <tr>
+                            <td>
+                                @visit.VisitDate?.ToString("yyyy-MM-dd HH:mm")
+                            </td>
+
+                            <td>@visit.Diagnosis</td>
+
+                            <td>@visit.Treatment</td>
+
+                            <td>@visit.Notes</td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    }
+
+    @if (isDoctorView)
+    {
+        <a asp-controller="MedicalHistory"
+           asp-action="View"
+           asp-route-id="@patientId"
+           class="btn btn-secondary mt-3">
+            Back to Medical History
+        </a>
+    }
+    else
+    {
+        <a asp-controller="MedicalHistory"
+           asp-action="Mine"
+           class="btn btn-secondary mt-3">
+            Back to Medical History
+        </a>
+    }
+
+</div>

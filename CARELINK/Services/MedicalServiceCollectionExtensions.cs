@@ -1,3 +1,4 @@
+
 namespace CARELINK.Services;
 
 public static class MedicalServiceCollectionExtensions
@@ -6,6 +7,15 @@ public static class MedicalServiceCollectionExtensions
     public static IServiceCollection AddMedicalServices(this IServiceCollection services)
     {
         services.AddScoped<MedicalHistoryService>();
+        services.AddScoped<PatientProfileService>();
+
+        // Medical CRUD services
+        services.AddScoped<MedicalConditionService>();
+        services.AddScoped<AllergyService>();
+        services.AddScoped<SurgeryService>();
+        services.AddScoped<MedicationService>();
+        services.AddScoped<MedicalVisitService>();
+
         return services;
     }
 }

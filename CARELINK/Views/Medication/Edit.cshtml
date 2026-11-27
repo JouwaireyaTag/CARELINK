@@ -1,0 +1,69 @@
+
+@model CARELINK.ViewModels.MedicationFormViewModel
+
+@{
+    ViewData["Title"] = "Edit Medication";
+}
+
+<div class="container mt-4">
+    <h2>Edit Medication</h2>
+
+    <form asp-action="Edit"
+          asp-route-id="@Model.MedicationId"
+          method="post">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <input asp-for="MedicationId" type="hidden" />
+
+        <div class="mb-3">
+            <label asp-for="MedicationName" class="form-label">Medication Name</label>
+            <input asp-for="MedicationName" class="form-control" />
+            <span asp-validation-for="MedicationName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Dosage" class="form-label">Dosage</label>
+            <input asp-for="Dosage" class="form-control" />
+            <span asp-validation-for="Dosage" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Frequency" class="form-label">Frequency</label>
+            <input asp-for="Frequency" class="form-control" />
+            <span asp-validation-for="Frequency" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="StartDate" class="form-label">Start Date</label>
+            <input asp-for="StartDate"
+                   type="date"
+                   asp-format="{0:yyyy-MM-dd}"
+                   class="form-control" />
+            <span asp-validation-for="StartDate" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="EndDate" class="form-label">End Date</label>
+            <input asp-for="EndDate"
+                   type="date"
+                   asp-format="{0:yyyy-MM-dd}"
+                   class="form-control" />
+            <span asp-validation-for="EndDate" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Notes" class="form-label">Notes</label>
+            <textarea asp-for="Notes" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Notes" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Medication</button>
+
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
