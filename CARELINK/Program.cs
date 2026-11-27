@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddCarelinkIdentity(builder.Configuration);
+builder.Services.AddMedicalServices();
 builder.Services.AddControllersWithViews(options =>
     // Every POST must carry the anti-forgery token (forms built with tag helpers do this automatically).
     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
