@@ -1,0 +1,23 @@
+@model CARELINK.ViewModels.PatientProfileViewModel
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<div class="container my-4">
+    @if (TempData["Message"] is string msg)
+    {
+        <div class="alert alert-success">@msg</div>
+    }
+
+    <h2>My Profile</h2>
+    <dl class="row mt-3">
+        <dt class="col-sm-3">Patient ID</dt><dd class="col-sm-9">@Model.PatientId</dd>
+        <dt class="col-sm-3">Full name</dt><dd class="col-sm-9">@Model.FullName</dd>
+        <dt class="col-sm-3">Email</dt><dd class="col-sm-9">@Model.Email</dd>
+        <dt class="col-sm-3">Date of birth</dt>
+        <dd class="col-sm-9">@(Model.DateOfBirth?.ToString("yyyy-MM-dd") ?? "-")</dd>
+    </dl>
+
+    <a asp-action="Edit" class="btn btn-primary">Edit profile</a>
+    <a asp-controller="MedicalHistory" asp-action="Mine" class="btn btn-outline-secondary">My medical history</a>
+</div>
