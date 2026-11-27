@@ -1,0 +1,100 @@
+
+@model CARELINK.ViewModels.SurgeryFormViewModel
+
+@{
+    ViewData["Title"] = "Edit Surgery";
+}
+
+<div class="container my-4">
+
+    <h2 class="mb-4">Edit Surgery</h2>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <form asp-action="Edit"
+                  asp-route-id="@Model.SurgeryId"
+                  method="post">
+
+                <input type="hidden" asp-for="SurgeryId" />
+
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger mb-3">
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="SurgeryName" class="form-label">
+                        Surgery Name
+                    </label>
+
+                    <input asp-for="SurgeryName"
+                           class="form-control" />
+
+                    <span asp-validation-for="SurgeryName"
+                          class="text-danger">
+                    </span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="SurgeryDate" class="form-label">
+                        Surgery Date
+                    </label>
+
+                    <input asp-for="SurgeryDate"
+                           type="date"
+                           class="form-control" />
+
+                    <span asp-validation-for="SurgeryDate"
+                          class="text-danger">
+                    </span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Hospital" class="form-label">
+                        Hospital
+                    </label>
+
+                    <input asp-for="Hospital"
+                           class="form-control" />
+
+                    <span asp-validation-for="Hospital"
+                          class="text-danger">
+                    </span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Notes" class="form-label">
+                        Notes
+                    </label>
+
+                    <textarea asp-for="Notes"
+                              class="form-control"
+                              rows="4">
+                    </textarea>
+
+                    <span asp-validation-for="Notes"
+                          class="text-danger">
+                    </span>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">
+                        Save Changes
+                    </button>
+
+                    <a asp-action="Index"
+                       class="btn btn-outline-secondary">
+                        Cancel
+                    </a>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,69 @@
+
+@model CARELINK.ViewModels.MedicalVisitFormViewModel
+
+@{
+    ViewData["Title"] = "Add Medical Visit";
+    var patientId = Context.Request.Query["patientId"].ToString();
+}
+
+<div class="container mt-4">
+    <h2>Add Medical Visit</h2>
+
+    <form asp-action="Create"
+          asp-route-patientId="@patientId"
+          method="post">
+
+        <div asp-validation-summary="ModelOnly"
+             class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="VisitDate" class="form-label">Visit Date</label>
+            <input asp-for="VisitDate"
+                   type="datetime-local"
+                   class="form-control" />
+            <span asp-validation-for="VisitDate"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Diagnosis" class="form-label">Diagnosis</label>
+            <textarea asp-for="Diagnosis"
+                      class="form-control"
+                      rows="3"></textarea>
+            <span asp-validation-for="Diagnosis"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Treatment" class="form-label">Treatment</label>
+            <textarea asp-for="Treatment"
+                      class="form-control"
+                      rows="3"></textarea>
+            <span asp-validation-for="Treatment"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Notes" class="form-label">Notes</label>
+            <textarea asp-for="Notes"
+                      class="form-control"
+                      rows="3"></textarea>
+            <span asp-validation-for="Notes"
+                  class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Save Medical Visit
+        </button>
+
+        <a asp-action="Index"
+           asp-route-patientId="@patientId"
+           class="btn btn-secondary">
+            Cancel
+        </a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

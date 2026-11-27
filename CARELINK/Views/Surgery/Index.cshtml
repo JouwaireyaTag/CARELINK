@@ -1,0 +1,90 @@
+
+@model List<CARELINK.Models.Surgery>
+
+@{
+    ViewData["Title"] = "Surgeries";
+}
+
+<div class="container my-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Surgeries</h2>
+
+        <a asp-action="Create" class="btn btn-primary">
+            Add Surgery
+        </a>
+    </div>
+
+    @if (TempData["Success"] is not null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["Success"]
+            <button type="button" class="btn-close"
+                    data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Surgery</th>
+                        <th>Date</th>
+                        <th>Hospital</th>
+                        <th>Notes</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var surgery in Model)
+                    {
+                        <tr>
+                            <td>@surgery.SurgeryName</td>
+                            <td>
+                                @surgery.SurgeryDate?.ToString("yyyy-MM-dd")
+                            </td>
+                            <td>@surgery.Hospital</td>
+                            <td>@surgery.Notes</td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <a asp-action="Edit"
+                                       asp-route-id="@surgery.SurgeryId"
+                                       class="btn btn-sm btn-outline-primary">
+                                        Edit
+                                    </a>
+
+                                    <form asp-action="Delete"
+                                          asp-route-id="@surgery.SurgeryId"
+                                          method="post"
+                                          onsubmit="return confirm('Are you sure you want to delete this surgery?');">
+
+                                        <button type="submit"
+                                                class="btn btn-sm btn-outline-danger">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            No surgeries have been recorded yet.
+        </div>
+    }
+
+    <a asp-controller="MedicalHistory"
+       asp-action="Mine"
+       class="btn btn-outline-secondary mt-3">
+        Back to Medical History
+    </a>
+
+</div>

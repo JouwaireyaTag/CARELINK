@@ -14,10 +14,16 @@ public static class SequenceIds
     public static readonly (string Sequence, string Prefix) Request = ("Seq_AccessRequests", "REQ-");
     public static readonly (string Sequence, string Prefix) Grant = ("Seq_AccessGrants", "ACC-");
     public static readonly (string Sequence, string Prefix) Audit = ("Seq_AuditLogs", "LOG-");
+    public static readonly (string Sequence, string Prefix) Condition = ("Seq_MedicalConditions", "CON-");
+    public static readonly (string Sequence, string Prefix) Allergy = ("Seq_Allergies", "ALG-");
+    public static readonly (string Sequence, string Prefix) Surgery = ("Seq_Surgeries", "SUR-");
+    public static readonly (string Sequence, string Prefix) Medication = ("Seq_Medications", "MED-");
+    public static readonly (string Sequence, string Prefix) Visit = ("Seq_MedicalVisits", "VIS-");
 
     private static readonly HashSet<string> AllowedSequences =
     [
         User.Sequence, Patient.Sequence, Doctor.Sequence, Request.Sequence, Grant.Sequence, Audit.Sequence,
+        Condition.Sequence, Allergy.Sequence, Surgery.Sequence, Medication.Sequence, Visit.Sequence,
     ];
 
     public static async Task<string> NextAsync(

@@ -23,6 +23,11 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<AccessRequest> AccessRequests => Set<AccessRequest>();
     public DbSet<AccessGrant> AccessGrants => Set<AccessGrant>();
     public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
+    public DbSet<MedicalCondition> MedicalConditions => Set<MedicalCondition>();
+    public DbSet<Allergy> Allergies => Set<Allergy>();
+    public DbSet<Surgery> Surgeries => Set<Surgery>();
+    public DbSet<Medication> Medications => Set<Medication>();
+    public DbSet<MedicalVisit> MedicalVisits => Set<MedicalVisit>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -116,6 +121,69 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             b.Property(a => a.UserId).HasColumnName("User_Id").HasMaxLength(20).IsUnicode(false);
             b.Property(a => a.Action).HasMaxLength(256);
             b.HasOne(a => a.User).WithMany().HasForeignKey(a => a.UserId);
+        });
+
+        builder.Entity<MedicalCondition>(b =>
+        {
+            b.ToTable("MedicalConditions", "dbo");
+            b.HasKey(c => c.ConditionId);
+            b.Property(c => c.ConditionId).HasColumnName("Condition_Id").HasMaxLength(20).IsUnicode(false);
+            b.Property(c => c.PatientId).HasColumnName("Patient_Id").HasMaxLength(20).IsUnicode(false);
+            b.Property(c => c.ConditionName).HasMaxLength(150);
+            b.Property(c => c.Notes).HasColumnName("Notes_Condition").HasMaxLength(500);
+            b.HasOne(c => c.Patient).WithMany().HasForeignKey(c => c.PatientId);
+        });
+
+        builder.Entity<Allergy>(b =>
+        {
+            b.ToTable("Allergies", "dbo");
+            b.HasKey(a => a.AllergyId);
+            b.Property(a => a.AllergyId).HasColumnName("Allergy_Id").HasMaxLength(20).IsUnicode(false);
+            b.Property(a => a.PatientId).HasColumnName("Patient_Id").HasMaxLength(20).IsUnicode(false);
+            b.Property(a => a.AllergyName).HasMaxLength(150);
+            b.Property(a => a.Reaction).HasMaxLength(256);
+            b.Property(a => a.Severity).HasMaxLength(50);
+            b.Property(a => a.Notes).HasColumnName("Notes_Allergies").HasMaxLength(500);
+            b.HasOne(a => a.Patient).WithMany().HasForeignKey(a => a.PatientId);
+        });
+
+        builder.Entity<Surgery>(b =>
+        {
+            b.ToTable("Surgeries", "dbo");
+            b.HasKey(s => s.SurgeryId);
+            b.Property(s => s.SurgeryId).HasColumnName("Surgery_Id").HasMaxLength(20).IsUnicode(false);
+            b.Property(s => s.PatientId).HasColumnName("Patient_Id").HasMaxLength(20).IsUnicode(false);
+            b.Property(s => s.SurgeryName).HasMaxLength(150);
+            b.Property(s => s.Hospital).HasMaxLength(150);
+            b.Property(s => s.Notes).HasColumnName("Notes_Surgeries").HasMaxLength(500);
+            b.HasOne(s => s.Patient).WithMany().HasForeignKey(s => s.PatientId);
+        });
+
+        builder.Entity<Medication>(b =>
+        {
+            b.ToTable("Medications", "dbo");
+            b.HasKey(m => m.MedicationId);
+            b.Property(m => m.MedicationId).HasColumnName("Medication_Id").HasMaxLength(20).IsUnicode(false);
+            b.Property(m => m.PatientId).HasColumnName("Patient_Id").HasMaxLength(20).IsUnicode(false);
+            b.Property(m => m.MedicationName).HasMaxLength(150);
+            b.Property(m => m.Dosage).HasMaxLength(100);
+            b.Property(m => m.Frequency).HasMaxLength(100);
+            b.Property(m => m.Notes).HasColumnName("Notes_Medications").HasMaxLength(500);
+            b.HasOne(m => m.Patient).WithMany().HasForeignKey(m => m.PatientId);
+        });
+
+        builder.Entity<MedicalVisit>(b =>
+        {
+            b.ToTable("MedicalVisits", "dbo");
+            b.HasKey(v => v.VisitId);
+            b.Property(v => v.VisitId).HasColumnName("Visit_Id").HasMaxLength(20).IsUnicode(false);
+            b.Property(v => v.PatientId).HasColumnName("Patient_Id").HasMaxLength(20).IsUnicode(false);
+            b.Property(v => v.DoctorId).HasColumnName("Doctor_Id").HasMaxLength(20).IsUnicode(false);
+            b.Property(v => v.Diagnosis).HasMaxLength(500);
+            b.Property(v => v.Treatment).HasMaxLength(500);
+            b.Property(v => v.Notes).HasColumnName("Notes_Visits").HasMaxLength(500);
+            b.HasOne(v => v.Patient).WithMany().HasForeignKey(v => v.PatientId);
+            b.HasOne(v => v.Doctor).WithMany().HasForeignKey(v => v.DoctorId);
         });
     }
 }
